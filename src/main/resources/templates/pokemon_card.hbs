@@ -1,0 +1,315 @@
+<html>
+<style>
+    #weather {
+        background-image: url("{{{weatherImage}}}");
+        width: 210px;
+        height: 302px;
+    }
+
+    #biome {
+        background-image: url("{{{biomeImage}}}");
+        width: 210px;
+        height: 302px;
+    }
+
+    #pokemon-container {
+        width: 210px;
+        height: 302px;
+        padding-top: 46px;
+        position: absolute;
+    }
+
+    #pokemon {
+        width: 88px;
+        height: 88px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-image: url("{{{image}}}");
+        background-position: bottom;
+        align-content: center;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    #frame {
+        background-image: url("{{{frame}}}");
+        width: 210px;
+        height: 302px;
+        position: relative;
+    }
+
+    .types {
+        display: flex;
+        padding-left: 15px;
+        width: 40px;
+    }
+
+    .title {
+        display: flex;
+        padding-top: 14px;
+    }
+
+    .type {
+        margin: auto;
+    }
+
+    .type2 {
+        background-image: url("{{{type2Image}}}");
+        background-size: 20px;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        z-index: 8;
+    }
+
+    .type1 {
+        background-image: url("{{{type1Image}}}");
+        background-size: 20px;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        z-index: 8;
+    }
+
+    .evolution-holder {
+        top: 131.6px;
+        left: 154px;
+        position: absolute;
+    }
+
+    .evolution {
+        background-image: url("{{{evolutionImage}}}");
+        font-family: La-Oriental;
+        font-size: 20px;
+        color: #f3f3f1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        width: 30px;
+        height: 30px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: 8;
+    }
+
+
+    @font-face {
+        font-family: "Barlow";
+        src: url(/assets/fonts/barlow.ttf) format("truetype");
+    }
+
+    @font-face {
+        font-family: "La-Oriental";
+        src: url(/assets/fonts/la_oriental.otf) format("truetype");
+    }
+
+    .stats div {
+        font-family: La-Oriental;
+        font-size: 11px;
+        margin: auto;
+    }
+
+    .stat {
+        text-align: center;
+        min-width: 17px;
+        margin: 0
+    }
+
+    .health {
+        position: absolute;
+        top: 78px;
+        left: 38px;
+    }
+
+    .iniciative {
+        position: absolute;
+        top: 78px;
+        left: 155px;
+    }
+
+    .name {
+        font-family: Barlow;
+        display: flex;
+        padding-left: 5px;
+        width: 115px;
+        max-height: 20px;
+        flex-wrap: wrap;
+    }
+
+    .learnable-types-holder {
+        width: 30px;
+        height: 31px;
+        top: 131.4px;
+        left: 26.25px;
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .learnable-types-holder div {
+        width: 15px;
+        height: 15px;
+        background-size: cover;
+    }
+
+
+    .encounter-holder {
+        position: absolute;
+        top: 135px;
+        width: 1px;
+        left: 92px;
+    }
+
+    .encounter {
+        background-image: url("{{{encounterImage}}}");
+        width: 23px;
+        height: 23px;
+        background-size: cover;
+    }
+
+    .ability-holder {
+        width: 170px;
+        height: 100px;
+        left: 22px;
+        position: absolute;
+    }
+
+    .ability-holder div {
+        font-family: Barlow;
+
+    }
+
+    .ability-holder .ability-title {
+        color: #f3f3f1;
+        font-size: 9.5px;
+        position: absolute;
+        top: 133.9px;
+    }
+
+    .ability-holder .ability-body {
+        font-size: 9px;
+        position: absolute;
+        top: 144.5px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        width: inherit;
+    }
+
+    .move-holder {
+        position: absolute;
+        top: 210px;
+        left: 15px;
+        width: 180px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .move-name {
+        position: absolute;
+        left: 20px;
+        width: 140px;
+        text-align: center;
+        font-family: Barlow;
+    }
+
+    .move-dice {
+        font-family: La-Oriental;
+        font-size: 20px;
+        position: absolute;
+        left: 160px;
+    }
+
+    .move-type {
+        position: absolute;
+        background-image: url("{{{moveTypeImage}}}");
+        background-size: cover;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+    }
+
+    {{#learnableTypes}}
+    .test{
+        display: compact;
+    }
+
+    .learnable-{{@index}} {
+        background-image: url("{{{.}}}");
+        background-size: cover;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        z-index: 8;
+
+    }
+    {{/learnableTypes}}
+
+    .move-description {
+        position: absolute;
+        top: 23px;
+        left: 8px;
+        text-align: center;
+        height: 60px;
+        font-family: Barlow;
+        font-size: 11px;
+        word-wrap: break-word;
+        width: 160px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+
+</style>
+<body>
+<div id="weather">
+    <div id="biome">
+        <div id="frame">
+            <div id="pokemon-container">
+                <div id="pokemon"></div>
+            </div>
+            <div class="title">
+                <div class="types">
+                    <div class="type type1"></div>
+                    <div class="type type2"></div>
+                </div>
+                <div class="name">
+                    <!--<div style="font-size: 0.75em; width: 100%">Bulbasaur<br/><div style="font-size: 0.5em; padding-left: 1px">Mega Form</div></div>-->
+                    <div style="font-size: 1em; width: 100%">{{name}}</div>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="health"><p class="stat">{{health}}</p></div>
+                <div class="iniciative"><p class="stat">{{initiative}}</p></div>
+            </div>
+            <div class="evolution-holder">
+                <div class="evolution">{{evolution_cost}}</div>
+            </div>
+            <div class="learnable-types-holder">
+                <div class="learnable-0"></div>
+                <div class="learnable-1"></div>
+                <div class="learnable-2"></div>
+                <div class="learnable-3"></div>
+            </div>
+            <div class="encounter-holder">
+                <div class="encounter"></div>
+            </div>
+            <div class="ability-holder">
+                <div class="ability-title">Habilidad: {{ability_name}}</div>
+                <div class="ability-body">{{ability_description}}</div>
+            </div>
+            <div class="move-holder">
+                <div class="move-type"></div>
+                <div class="move-name">{{move_name}}</div>
+                <div class="move-dice">{{move_dice}}</div>
+                <div class="move-description">
+                    {{move_description}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<html>
+<style>
+    #weather {
+        background-image: url(/assets/weather/sunny.svg);
+        width: 210px;
+        height: 302px;
+    }
+
+    #biome {
+        background-image: url(/assets/biomes/forest.svg);
+        width: 210px;
+        height: 302px;
+    }
+
+    #pokemon-container {
+        width: 210px;
+        height: 302px;
+        padding-top: 46px;
+        position: absolute;
+    }
+
+    #pokemon {
+        width: 88px;
+        height: 88px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-image: url(/assets/pokemons/001.png);
+        background-position: bottom;
+        align-content: center;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    #frame {
+        background-image: url(/assets/frames/pokemon_frame.svg);
+        width: 210px;
+        height: 302px;
+        position: relative;
+    }
+
+    .types {
+        display: flex;
+        padding-left: 15px;
+        width: 40px;
+    }
+
+    .title {
+        display: flex;
+        padding-top: 14px;
+    }
+
+    .type {
+        margin: auto;
+    }
+
+    .poison {
+        background-image: url(/assets/types/poison.png);
+        background-size: 20px;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        z-index: 8;
+    }
+
+    .grass {
+        background-image: url(data:image/png;base64,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);
+        background-size: 20px;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        z-index: 8;
+    }
+
+    .evolution-holder {
+        top: 131.6px;
+        left: 154px;
+        position: absolute;
+    }
+
+    .evolution {
+        background-image: url(/assets/evolution/standard.png);
+        font-family: La-Oriental;
+        font-size: 20px;
+        color: #f3f3f1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        width: 30px;
+        height: 30px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: 8;
+    }
+
+
+    @font-face {
+        font-family: "Barlow";
+        src: url(/assets/fonts/barlow.ttf) format("truetype");
+    }
+
+    @font-face {
+        font-family: "La-Oriental";
+        src: url(/assets/fonts/la_oriental.otf) format("truetype");
+    }
+
+    .stats div {
+        font-family: La-Oriental;
+        font-size: 11px;
+        margin: auto;
+    }
+
+    .stat {
+        text-align: center;
+        min-width: 17px;
+        margin: 0
+    }
+
+    .health {
+        position: absolute;
+        top: 78px;
+        left: 38px;
+    }
+
+    .iniciative {
+        position: absolute;
+        top: 78px;
+        left: 155px;
+    }
+
+    .name {
+        font-family: Barlow;
+        display: flex;
+        padding-left: 5px;
+        width: 115px;
+        max-height: 20px;
+        flex-wrap: wrap;
+    }
+
+    .learnable-types-holder {
+        width: 30px;
+        height: 31px;
+        top: 131.4px;
+        left: 26.25px;
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .learnable-types-holder div {
+        width: 15px;
+        height: 15px;
+        background-size: cover;
+    }
+
+    .encounter-holder {
+        position: absolute;
+        top: 135px;
+        width: 1px;
+        left: 92px;
+    }
+
+    .encounter {
+        background-image: url("/assets/encounters/starter.png");
+        width: 23px;
+        height: 23px;
+        background-size: cover;
+    }
+
+    .ability-holder {
+        width: 170px;
+        height: 100px;
+        left: 22px;
+        position: absolute;
+    }
+
+    .ability-holder div {
+        font-family: Barlow;
+
+    }
+
+    .ability-holder .ability-title {
+        color: #f3f3f1;
+        font-size: 9.5px;
+        position: absolute;
+        top: 133.9px;
+    }
+
+    .ability-holder .ability-body {
+        font-size: 9px;
+        position: absolute;
+        top: 144.5px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        width: inherit;
+    }
+
+    .move-holder {
+        position: absolute;
+        top: 210px;
+        left: 15px;
+        width: 180px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .move-name {
+        position: absolute;
+        left: 20px;
+        width: 140px;
+        text-align: center;
+        font-family: Barlow;
+    }
+
+    .move-dice {
+        font-family: La-Oriental;
+        font-size: 20px;
+        position: absolute;
+        left: 160px;
+    }
+
+    .move-type {
+        position: absolute;
+        background-image: url(/assets/types/grass.png);
+        background-size: cover;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+    }
+
+    .move-description {
+        position: absolute;
+        top: 23px;
+        left:8px;
+        text-align: center;
+        height: 60px;
+        font-family: Barlow;
+        font-size: 11px;
+        word-wrap: break-word;
+        width: 160px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+
+</style>
+<body>
+<div id="weather">
+    <div id="biome">
+        <div id="frame">
+            <div id="pokemon-container">
+                <div id="pokemon"></div>
+            </div>
+            <div class="title">
+                <div class="types">
+                    <div class="type grass"></div>
+                    <div class="type poison"></div>
+                </div>
+                <div class="name">
+                    <!--<div style="font-size: 0.75em; width: 100%">Bulbasaur<br/><div style="font-size: 0.5em; padding-left: 1px">Mega Form</div></div>-->
+                    <div style="font-size: 1em; width: 100%">Bulbasaur</div>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="health"><p class="stat">99</p></div>
+                <div class="iniciative"><p class="stat">99</p></div>
+            </div>
+            <div class="evolution-holder">
+                <div class="evolution">3</div>
+            </div>
+            <div class="learnable-types-holder">
+                <div class="grass"></div>
+                <div class="grass"></div>
+                <div class="grass"></div>
+                <div class="grass"></div>
+            </div>
+            <div class="encounter-holder">
+                <div class="encounter"></div>
+            </div>
+            <div class="ability-holder">
+                <div class="ability-title">Habilidad: Nombre habilidad</div>
+                <div class="ability-body">asdasdasdasdasdasdasdasdasdsadsadsadasdasdsadasdsadasdasasddsdasdasdas</div>
+            </div>
+            <div class="move-holder">
+                <div class="move-type"></div>
+                <div class="move-name">Move name</div>
+                <div class="move-dice">3</div>
+                <div class="move-description">
+                    sdasdsdaasdasdsadasdadssaasdasddasdasdsdasdsdaasdasdsadasdadssaasdasddasdasdsdasdsdaasdas
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

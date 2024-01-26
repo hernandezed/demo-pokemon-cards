@@ -1,0 +1,30 @@
+[
+  {
+    "number": "001",
+    "name": "Bulbasaur",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "learnableAttacks": [
+      "grass",
+      "poison",
+      "normal",
+      "bug"
+    ],
+    "weather": "sunny",
+    "biome": "forest",
+    "encounter": "starter",
+    "evolution_requirement": "3",
+    "attack": {
+      "type": "grass",
+      "name": "Látigo cepa",
+      "description": "El objetivo no puede cambiar",
+      "dice": "2"
+    },
+    "ability": {
+      "name": "Espesura",
+      "description": "Cuando la salud caiga por debajo del 50%, agrega un dado a las tiradas de tipo planta"
+    }
+  }
+]
