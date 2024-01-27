@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.util.ResourceUtils;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Base64;
 import java.util.HashMap;
@@ -18,21 +19,23 @@ public class DemoApplication {
         Handlebars handlebars = new Handlebars();
 
         Template mustache = handlebars.compile("templates/pokemon_card");
+        ImageEncoder imageEncoder = new ImageEncoder();
 
         HashMap<Object, Object> bulbasaur = new HashMap<>();
-        bulbasaur.put("weatherImage", "data:image/svg+xml;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/weather/sunny.svg"))));
-        bulbasaur.put("biomeImage", "data:image/svg+xml;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/biomes/forest.svg"))));
-        bulbasaur.put("image", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/pokemons/001.png"))));
-        bulbasaur.put("frame", "data:image/svg+xml;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/frames/pokemon_frame.svg"))));
-        bulbasaur.put("type2Image", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/poison.png"))));
-        bulbasaur.put("type1Image", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/grass.png"))));
-        bulbasaur.put("evolutionImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/evolution/standard.png"))));
-        bulbasaur.put("encounterImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/encounters/starter.png"))));
-        bulbasaur.put("moveTypeImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/grass.png"))));
-        bulbasaur.put("learnableTypes",  List.of("data:image/png;base64," +Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/grass.png"))),
-                "data:image/png;base64," +Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/poison.png"))),
-                "data:image/png;base64," +Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/normal.png"))),
-                "data:image/png;base64," +Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/ground.png")))));
+        bulbasaur.put("weatherImage", imageEncoder.encode("classpath:assets/weather/sunny.svg"));
+        bulbasaur.put("biomeImage", imageEncoder.encode("classpath:assets/biomes/forest.svg"));
+        bulbasaur.put("image", imageEncoder.encode("classpath:assets/pokemons/001.png"));
+        bulbasaur.put("frame", imageEncoder.encode("classpath:assets/frames/pokemon_frame.svg"));
+        bulbasaur.put("type2Image", imageEncoder.encode("classpath:assets/types/poison.png"));
+        bulbasaur.put("type1Image", imageEncoder.encode("classpath:assets/types/grass.png"));
+        bulbasaur.put("evolutionImage", imageEncoder.encode("classpath:assets/evolution/standard.png"));
+        bulbasaur.put("encounterImage", imageEncoder.encode("classpath:assets/encounters/starter.png"));
+        bulbasaur.put("moveTypeImage", imageEncoder.encode("classpath:assets/types/grass.png"));
+        bulbasaur.put("learnableTypes", List.of(
+                imageEncoder.encode("classpath:assets/types/grass.png"),
+                imageEncoder.encode("classpath:assets/types/poison.png"),
+                imageEncoder.encode("classpath:assets/types/normal.png"),
+                imageEncoder.encode("classpath:assets/types/ground.png")));
 
         bulbasaur.put("name", "Bulbasaur");
         bulbasaur.put("health", "5");
@@ -44,24 +47,30 @@ public class DemoApplication {
         bulbasaur.put("move_dice", "2");
         bulbasaur.put("move_description", "Inflinge el estado Dormido al objetivo");
 
-        try (PrintWriter out = new PrintWriter("001.html")) {
+        File file1 = ResourceUtils.getFile("001.html");
+        if (!file1.exists()) {
+            file1.createNewFile();
+        }
+        try (PrintWriter out = new PrintWriter(file1)) {
             out.println(mustache.apply(bulbasaur));
         }
 
         HashMap<Object, Object> venusaur = new HashMap<>();
-        venusaur.put("weatherImage", "data:image/svg+xml;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/weather/sunny.svg"))));
-        venusaur.put("biomeImage", "data:image/svg+xml;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/biomes/forest.svg"))));
-        venusaur.put("image", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/pokemons/003.png"))));
-        venusaur.put("frame", "data:image/svg+xml;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/frames/pokemon_frame.svg"))));
-        venusaur.put("type2Image", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/poison.png"))));
-        venusaur.put("type1Image", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/grass.png"))));
-        venusaur.put("evolutionImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/evolution/final.png"))));
-        venusaur.put("encounterImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/encounters/strong.png"))));
-        venusaur.put("moveTypeImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/grass.png"))));
-        venusaur.put("learnableTypes",  List.of("data:image/png;base64," +Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/grass.png"))),
-                "data:image/png;base64," +Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/poison.png"))),
-                "data:image/png;base64," +Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/normal.png"))),
-                "data:image/png;base64," +Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(ResourceUtils.getFile("classpath:assets/types/ground.png")))));
+
+        venusaur.put("weatherImage", imageEncoder.encode("classpath:assets/weather/sunny.svg"));
+        venusaur.put("biomeImage", imageEncoder.encode("classpath:assets/biomes/forest.svg"));
+        venusaur.put("image", imageEncoder.encode("classpath:assets/pokemons/003.png"));
+        venusaur.put("frame", imageEncoder.encode("classpath:assets/frames/pokemon_frame.svg"));
+        venusaur.put("type2Image", imageEncoder.encode("classpath:assets/types/poison.png"));
+        venusaur.put("type1Image", imageEncoder.encode("classpath:assets/types/grass.png"));
+        venusaur.put("evolutionImage", imageEncoder.encode("classpath:assets/evolution/final.png"));
+        venusaur.put("encounterImage", imageEncoder.encode("classpath:assets/encounters/strong.png"));
+        venusaur.put("moveTypeImage", imageEncoder.encode("classpath:assets/types/grass.png"));
+        venusaur.put("learnableTypes", List.of(
+                imageEncoder.encode("classpath:assets/types/grass.png"),
+                imageEncoder.encode("classpath:assets/types/poison.png"),
+                imageEncoder.encode("classpath:assets/types/normal.png"),
+                imageEncoder.encode("classpath:assets/types/ground.png")));
 
         venusaur.put("name", "Venusaur");
         venusaur.put("health", "9");
@@ -72,7 +81,11 @@ public class DemoApplication {
         venusaur.put("move_dice", "6");
         venusaur.put("move_description", "Si se uso el ataque en el anterior turno, lanza 4 dados");
 
-        try (PrintWriter out = new PrintWriter("003.html")) {
+        File file2 = ResourceUtils.getFile("003.html");
+        if (!file2.exists()) {
+            file2.createNewFile();
+        }
+        try (PrintWriter out = new PrintWriter(file2)) {
             out.println(mustache.apply(venusaur));
         }
 
